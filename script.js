@@ -2,15 +2,21 @@ const inputField = document.getElementById("text-input");
 const checkButton = document.getElementById("check-btn");
 const resultField = document.getElementById("result");
 
+const cleanInputString = (string) => {
+  const regex = /[\W_]/g;
+  return string.replace(regex, "");
+};
+
 const checkPalindrome = () => {
-  const inputText = inputField.value;
+  const inputText = cleanInputString(inputField.value).toLowerCase();
   const reverseText = inputText.split("").reverse().join("");
-  console.log(reverseText);
-  if (inputText === reverseText) {
-    resultField.innerHTML = `<strong>${inputText}</strong> is a palindrome.`;
+  if (inputText === "") {
+    alert("Please input a value");
+  } else if (inputText === reverseText) {
+    resultField.innerHTML = `<strong>${inputField.value}</strong> is a palindrome.`;
     resultField.style.display = "block";
   } else {
-    resultField.innerHTML = `<strong>${inputText}</strong> is not a palindrome.`;
+    resultField.innerHTML = `<strong>${inputField.value}</strong> is not a palindrome.`;
     resultField.style.display = "block";
   }
   inputField.value = "";
